@@ -5,7 +5,7 @@ import time
 from multiprocessing import Pool
 import keyboard
 import netaddr
-
+from contextlib import suppress
 
 def get_raw_ip():
     #  for new_ip in reversed(range(2 ** 30)):
@@ -25,19 +25,16 @@ def save_ip(ip):
 
 
 def func_scan(inp_ip):
-
-    try:
-        ip = str(netaddr.IPAddress(inp_ip))
-        sys.stdout.write("\r" + ip)
-        sys.stdout.flush()
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(1)
-        sock.connect((ip, 3128))
-        sock.close()
-        print(f'\n Хост {ip} Доступен')
-        save_ip(ip)
-    except Exception as e:
-        print(str(e))
+    ip = str(netaddr.IPAddress(inp_ip))
+    sys.stdout.write("\r" + ip)
+    sys.stdout.flush()
+    with suppress(socket.error):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(1)
+            sock.connect((ip, 3128))
+            sock.close()
+            print(f'\n Хост {ip} Доступен')
+            save_ip(ip)
 
 
 def stop_scan():
