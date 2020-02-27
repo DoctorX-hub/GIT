@@ -72,7 +72,7 @@ if __name__ == '__main__':
             results = p.map(push_treads, ip_list)  # 1000 потоков на процесс
     end_t = time.time()
     times = end_t - start_t
-    print(f'\n Затрачено времени: {round(times)} sec')
+    #print(f'\n Затрачено времени: {round(times)} sec')
     print(f'\n Проверено ip: {x}')
     print(f'\n Скорость: {round(x / times)} host\s')
     print('\n Нажмите любую клавищу для выхода')
