@@ -1,7 +1,10 @@
-from queue import Queue
-import threading, time, socket, sys
-import netaddr, keyboard
+import socket
+import sys
+import threading
+import time
 from multiprocessing import Pool
+import keyboard
+import netaddr
 
 
 def get_raw_ip():
