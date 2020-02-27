@@ -36,9 +36,8 @@ def func_scan(inp_ip):
         sock.close()
         print(f'\n Хост {ip} Доступен')
         save_ip(ip)
-    except:
-        # print(f'Хост {ip} Недоступен\n')
-        pass
+    except Exception as e:
+        print(str(e))
 
 
 def stop_scan():
